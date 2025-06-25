@@ -1,0 +1,30 @@
+[
+    {
+      "id": 1,
+      "title": "Cybersecurity Infrastructure Upgrade",
+      "agency": "Department of Defense",
+      "postDate": "2025-06-20",
+      "description": "Seeking proposals for a comprehensive upgrade of cybersecurity infrastructure."
+    },
+    {
+      "id": 2,
+      "title": "Cloud Migration Services",
+      "agency": "General Services Administration",
+      "postDate": "2025-06-18",
+      "description": "Full-scale migration of legacy systems to a modern cloud environment."
+    },
+    {
+      "id": 3,
+      "title": "Data Analytics Platform Development",
+      "agency": "Department of Health",
+      "postDate": "2025-06-15",
+      "description": "Development of a platform for analyzing public health data trends."
+    },
+    {
+      "id": 4,
+      "title": "IT Help Desk Support Services",
+      "agency": "Department of the Interior",
+      "postDate": "2025-06-12",
+      "description": "Providing tier 1 and tier 2 help desk support for 5,000 agency employees."
+    }
+  ]
