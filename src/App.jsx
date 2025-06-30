@@ -13,6 +13,9 @@ function App() {
   // Add new state for the search term
   const [searchTerm, setSearchTerm] = useState('');
 
+  // Add new state for the sort order, empty string in this case is to mark default order
+  const[sortKey, setSortKey] = useState('');
+
   // Use the useEffect Hook to load our data when the component first renders.
   useEffect(() => {
     //In a real app, you would fetch the data from an API here.
@@ -30,16 +33,40 @@ function App() {
     contracts.title.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  //3. The return statement contains the JSX (HTML-like code) that this component will display.
+  //
+  const sortedAndFilteredContracts = [...filteredContracts].sort((a,b) => {
+    if(sortKey === 'title'){
+      //localeCompare is a standard way to compare strings alphabetically
+      return a.title.localeCompare(b.title);
+    }
+    else if( sortKey === 'postDate'){
+      // To sort by date, we convert the date strings to Date Objects.
+      // We then "subtract" them, b-a gives decending order (newest first)
+      return new Date(b.postDate) - new Date(a.postDate);
+    }
+    // If no "sortKey" is set, dont change order
+    return 0;
+  });
+
+  // The return statement contains the JSX (HTML-like code) that this component will display.
   return (
     <div>
       <h1>Contract Sync Portal</h1>
+
       {/* Render the SearchBar and pass it the necessary Props */}
       <SearchBar searchTerm={searchTerm} onSearchChange={handleSearchChange}/>
+
+      {/* Render the Sorting Options */}
+      <div className="sort-button">
+        <button onClick={() => setSortKey('title')}>Sort by Title</button>
+        <button onClick = {() => setSortKey('postDate')}>Sort by Date</button>
+        <button onClick={() => setSortKey('')}>Reset Sort</button>
+      </div>
+
       {/* Instead of doing .map and getting each contract and displaying them manually, we just send the contracts to ContractList and it seperates each
           contract into its own ContractCard where it is then displayed on the ContractList */}
-      {/* Pass 'filteredContracts' down to ContractList instead of just all the contracts to only show contracts based on search */}    
-      <ContractList contracts={filteredContracts} />
+      {/* Pass 'sortedAndFilteredContracts' down to ContractList instead of just all the contracts to only show contracts based on search and any filters */}    
+      <ContractList contracts={sortedAndFilteredContracts} />
     </div>
   );
 }
