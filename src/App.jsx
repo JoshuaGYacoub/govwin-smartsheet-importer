@@ -9,12 +9,15 @@ function App() {
   //   Its inital  value is an empty array []
   //   'setContracts' is the function we will use to update it.
   const [contracts, setContracts] = useState([]);
+  //------------------------
 
   // Add new state for the search term
   const [searchTerm, setSearchTerm] = useState('');
+  //------------------------
 
   // Add new state for the sort order, empty string in this case is to mark default order
   const[sortKey, setSortKey] = useState('');
+  //------------------------
 
   // Use the useEffect Hook to load our data when the component first renders.
   useEffect(() => {
@@ -22,18 +25,29 @@ function App() {
     //We are simulating an API by calling 'setContracts' with the imported data from the JSON we created.
     setContracts(ContractData);
   },[]); //The empty '[]' dependency array tells react to run this effect only ONCE.
+  //------------------------
+
+  // This function will handle the deletion of a specific Contract in the ContractList
+  const handleDelete = (idToDelete) => {
+    setContracts(currentContracts => 
+      currentContracts.filter(contract => contract.id !== idToDelete)
+    );
+  };
+  //------------------------
 
   // This function will be passed down to the SearchBar component
   const handleSearchChange = (event) => {
     setSearchTerm(event.target.value);
   };
+  //------------------------
 
   // Derive the filtered list based on current searchTerm
   const filteredContracts = contracts.filter(contracts => 
     contracts.title.toLowerCase().includes(searchTerm.toLowerCase())
   );
+  //------------------------
 
-  //
+  // Derive the filtered list based on any sort and searchTerm
   const sortedAndFilteredContracts = [...filteredContracts].sort((a,b) => {
     if(sortKey === 'title'){
       //localeCompare is a standard way to compare strings alphabetically
@@ -47,6 +61,7 @@ function App() {
     // If no "sortKey" is set, dont change order
     return 0;
   });
+  //------------------------
 
   // The return statement contains the JSX (HTML-like code) that this component will display.
   return (
@@ -66,7 +81,7 @@ function App() {
       {/* Instead of doing .map and getting each contract and displaying them manually, we just send the contracts to ContractList and it seperates each
           contract into its own ContractCard where it is then displayed on the ContractList */}
       {/* Pass 'sortedAndFilteredContracts' down to ContractList instead of just all the contracts to only show contracts based on search and any filters */}    
-      <ContractList contracts={sortedAndFilteredContracts} />
+      <ContractList contracts={sortedAndFilteredContracts} onDelete={handleDelete} />
     </div>
   );
 }
