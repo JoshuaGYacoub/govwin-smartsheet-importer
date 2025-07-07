@@ -19,6 +19,10 @@ function App() {
   const[sortKey, setSortKey] = useState('');
   //------------------------
 
+  // Add new state to hold the ID for the contract being edited, null means no contract is being edited
+  const [editingId, setEditingId] = useState(null);
+  //------------------------
+
   // Use the useEffect Hook to load our data when the component first renders.
   useEffect(() => {
     //In a real app, you would fetch the data from an API here.
@@ -27,11 +31,25 @@ function App() {
   },[]); //The empty '[]' dependency array tells react to run this effect only ONCE.
   //------------------------
 
-  // This function will handle the deletion of a specific Contract in the ContractList
+  // This function will handle the frontend deletion of a specific Contract in the ContractList
   const handleDelete = (idToDelete) => {
     setContracts(currentContracts => 
       currentContracts.filter(contract => contract.id !== idToDelete)
     );
+  };
+  //------------------------
+
+  // This function will handle the frontend "On Save" functionality after saving an edit 
+  const handleUpdate = (idToUpdate, updatedData) => {
+    setContracts(currentContracts =>
+      currentContracts.map(contract => {
+        if (contract.id === idToUpdate){
+          return {...contract, ...updatedData};
+        }
+        return contract;
+      })
+    );
+    setEditingId(null);
   };
   //------------------------
 
@@ -81,7 +99,13 @@ function App() {
       {/* Instead of doing .map and getting each contract and displaying them manually, we just send the contracts to ContractList and it seperates each
           contract into its own ContractCard where it is then displayed on the ContractList */}
       {/* Pass 'sortedAndFilteredContracts' down to ContractList instead of just all the contracts to only show contracts based on search and any filters */}    
-      <ContractList contracts={sortedAndFilteredContracts} onDelete={handleDelete} />
+      <ContractList 
+        contracts={sortedAndFilteredContracts} 
+        onDelete={handleDelete}
+        editingId={editingId}
+        setEditingId={setEditingId}
+        onSave={handleUpdate}
+      />
     </div>
   );
 }

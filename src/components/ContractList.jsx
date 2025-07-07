@@ -3,7 +3,7 @@
 import ContractCard from "./ContactCard"; //Import the component we just made
 
 //This component receives the full 'contracts' array as a prop.
-function ContractList({ contracts, onDelete }) {
+function ContractList({ contracts, onDelete, editingId, setEditingId, onSave }) {
     return (
         <div classname="contract-list">
             {/*We map over the 'contracts' array in our state. For each 'contract' object 
@@ -16,6 +16,10 @@ function ContractList({ contracts, onDelete }) {
                     key={contract.id} 
                     contract={contract}
                     onDelete={() => onDelete(contract.id)}
+                    isEditing={editingId === contract.id}
+                    onEdit={()=> setEditingId(contract.id)}
+                    onCancel={() => setEditingId(null)}
+                    onSave={onSave}
                 />
             ))}
         </div>
