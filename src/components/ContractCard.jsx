@@ -1,5 +1,7 @@
 // src/components/ContractCard.jsx
+
 import { useState } from 'react';
+import './ContractCard.css'
 
 // We receive "props" as an argument. We are "destructuring" the 'contract' object
 // out of the props object, which is a common and clean way to access props

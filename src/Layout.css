@@ -1,0 +1,33 @@
+/* src/Layout.css */
+.app-layout {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  grid-template-rows: 60px 1fr;
+  grid-template-areas:
+    "sidebar header"
+    "sidebar main";
+}
+
+.sidebar {
+  grid-area: sidebar;
+  background-color: #fafafa; /* Changed to light grey */
+  border-right: 1px solid #e9edf2;
+  padding: 20px;
+}
+
+.header {
+  grid-area: header;
+  background-color: #fafafa; /* Changed to a different light grey */
+  border-bottom: 1px solid #e9edf2;
+  padding: 0 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.main-content {
+  grid-area: main;
+  padding: 20px;
+  overflow-y: auto;
+  background-color: #fafafa; /* Changed to off-white */
+}

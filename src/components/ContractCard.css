@@ -1,0 +1,35 @@
+/* src/components/ContractCard.css */
+
+.contract-item {
+  background-color: #ffffff;
+  border: 1px solid #e9edf2;
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 15px;
+  text-align: left;
+  box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+}
+
+.contract-item h2 {
+  margin-top: 0;
+  color: #111827;
+  font-size: 1.125rem;
+}
+
+.contract-item p {
+    font-size: 0.875rem;
+    color: #6b7280;
+}
+
+.contract-item input {
+  display: block;
+  width: calc(100% - 20px);
+  padding: 8px 10px;
+  margin-bottom: 10px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+}
+
+.delete-btn, .edit-btn, .cancel-btn, .save-btn {
+    margin-right: 10px;
+}

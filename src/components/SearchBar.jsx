@@ -1,4 +1,5 @@
 // src/components/SearchBar.jsx
+import './SearchBar.css';
 
 function SearchBar({ searchTerm, onSearchChange }){
     return (

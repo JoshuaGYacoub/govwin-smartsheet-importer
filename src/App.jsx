@@ -3,6 +3,7 @@ import ContractData from './mock-govwin-data.json'; //JSON Storing Fake Structur
 import ContractList from './components/ContractList'; // Import list component that stores each contract
 import SearchBar from './components/SearchBar'; // Import Search Bar component
 import './App.css';
+import './Layout.css';
 
 function App() {
   // Create a state variable called 'contract' to store our array of contracts.
@@ -83,29 +84,42 @@ function App() {
 
   // The return statement contains the JSX (HTML-like code) that this component will display.
   return (
-    <div>
-      <h1>Contract Sync Portal</h1>
+    <div className='app-layout'>
 
-      {/* Render the SearchBar and pass it the necessary Props */}
-      <SearchBar searchTerm={searchTerm} onSearchChange={handleSearchChange}/>
+      <div className='sidebar'>
+        <h3>GovWin Importer</h3>
 
-      {/* Render the Sorting Options */}
-      <div className="sort-button">
-        <button onClick={() => setSortKey('title')}>Sort by Title</button>
-        <button onClick = {() => setSortKey('postDate')}>Sort by Date</button>
-        <button onClick={() => setSortKey('')}>Reset Sort</button>
+        {/* Render the SearchBar and pass it the necessary Props */}
+        <SearchBar searchTerm={searchTerm} onSearchChange={handleSearchChange}/>
+
+        {/* We will build out sidebar later */}
       </div>
 
-      {/* Instead of doing .map and getting each contract and displaying them manually, we just send the contracts to ContractList and it seperates each
-          contract into its own ContractCard where it is then displayed on the ContractList */}
-      {/* Pass 'sortedAndFilteredContracts' down to ContractList instead of just all the contracts to only show contracts based on search and any filters */}    
-      <ContractList 
-        contracts={sortedAndFilteredContracts} 
-        onDelete={handleDelete}
-        editingId={editingId}
-        setEditingId={setEditingId}
-        onSave={handleUpdate}
-      />
+      <header className='header'>
+        <h3>Contracts</h3>
+        <button className='export-btn'>Export</button>
+      </header>
+
+      <main className='main-content'>
+        <div className='content-header'>
+            {/* Render the Sorting Options */}
+            <div className="sort-button">
+              <button onClick={() => setSortKey('title')}>Sort by Title</button>
+              <button onClick = {() => setSortKey('postDate')}>Sort by Date</button>
+              <button onClick={() => setSortKey('')}>Reset Sort</button>
+            </div>
+          </div>
+          {/* Instead of doing .map and getting each contract and displaying them manually, we just send the contracts to ContractList and it seperates each
+              contract into its own ContractCard where it is then displayed on the ContractList */}
+          {/* Pass 'sortedAndFilteredContracts' down to ContractList instead of just all the contracts to only show contracts based on search and any filters */}    
+          <ContractList 
+            contracts={sortedAndFilteredContracts} 
+            onDelete={handleDelete}
+            editingId={editingId}
+            setEditingId={setEditingId}
+            onSave={handleUpdate}
+          />
+      </main>
     </div>
   );
 }

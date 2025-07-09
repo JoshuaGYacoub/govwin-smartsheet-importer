@@ -1,0 +1,15 @@
+/* src/components/SearchBar.css */
+
+.search-bar {
+    margin-top: 20px; /* Add some space below the "Dialin" title */
+    margin-bottom: 20px;
+}
+
+.search-bar input {
+  width: calc(100% - 24px); /* Make it full-width minus padding */
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: 1px solid #d1d5db;
+  font-size: 0.875rem;
+  background-color: #ffffff;
+}

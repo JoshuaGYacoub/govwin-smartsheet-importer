@@ -1,6 +1,6 @@
 // src/components/ContractList.jsx
 
-import ContractCard from "./ContactCard"; //Import the component we just made
+import ContractCard from "./ContractCard"; //Import the component we just made
 
 //This component receives the full 'contracts' array as a prop.
 function ContractList({ contracts, onDelete, editingId, setEditingId, onSave }) {
